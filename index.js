@@ -1,8 +1,11 @@
 const app = require('express')()
 require('./config/express')(app)
+
 const mongoose = require('mongoose')
 
 const config = require('./config/config');
+
+
 
 mongoose.connect(config.dbUri, {
     useNewUrlParser: true,
@@ -13,12 +16,14 @@ mongoose.connect(config.dbUri, {
       throw err
     }
 
-    //Here is routes
-
+    //Here is home route
     app.get('/', (req, res) => {
-        res.send('Hello World')
+        res.render('home', {
+            title: 'Home page',
+            loggedIn: true
+        })
     })
-    
+
     app.listen(config.port, console.log(`Database and Server is up and running on port ${config.port}`))
   }) 
 

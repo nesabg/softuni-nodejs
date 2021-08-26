@@ -2,6 +2,11 @@ const express = require('express')
 const handlebars = require('express-handlebars')
 const cookieParser = require('cookie-parser')
 
+// Adding routes
+
+const authRouter = require('../routes/authRouter')
+const theaterRouter = require('../routes/theaterRouter')
+
 module.exports = (app) => {
     app.use(cookieParser())
     app.use(express.json())
@@ -13,4 +18,7 @@ module.exports = (app) => {
     app.set('view engine', '.hbs');
   
     app.use('/static', express.static('static'))
+
+    app.use(authRouter)
+    app.use(theaterRouter)
   };
