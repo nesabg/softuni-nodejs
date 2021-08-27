@@ -4,6 +4,7 @@ require('./config/express')(app)
 const mongoose = require('mongoose')
 
 const config = require('./config/config');
+const { isAuth, isLoggedIn } = require('./controller/authController');
 
 
 
@@ -17,10 +18,10 @@ mongoose.connect(config.dbUri, {
     }
 
     //Here is home route
-    app.get('/', (req, res) => {
+    app.get('/', isLoggedIn, (req, res) => {
         res.render('home', {
             title: 'Home page',
-            loggedIn: true
+            isLoggedIn: req.isLoggedIn
         })
     })
 

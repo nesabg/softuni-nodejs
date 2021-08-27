@@ -3,12 +3,17 @@
             <a>Theater</a>
             <ul>
                 <li><a href="/">Home </a></li>
-                <li><a href="#">Logout</a></li>
+                {{#if isLoggedIn}}
+                <li><a href="/logout">Logout</a></li>
+                {{else}}
                 <li><a href="/login">Login</a></li>
                 <li><a href="/register">Register</a></li>
+                {{/if}}
             </ul>
         </nav>
-        <section class="notifications error">
-            <p>Message...</p>
+        {{#if error}}
+        <section class="notifications error">          
+                <p>{{ message }}</p>         
         </section>
+         {{/if}}
         <main>
