@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router()
 
-const { saveUser, getUser, isAuth } = require('../controller/authController')
+const { saveUser, getUser, guestAccess, isAuth } = require('../controller/authController')
 
 
-router.get('/login', (req, res) => {
+router.get('/login', guestAccess, (req, res) => {
 
     res.render('auth/login', {
         title: 'Login page | Sofuni Nodejs'
@@ -15,7 +15,7 @@ router.get('/login', (req, res) => {
 router.post('/login', async (req, res) => {
 
     const error = await getUser(req, res)
-
+    
     if(error) {
         res.render('auth/login', {
             title: `Error | ${error.message}`,
@@ -29,7 +29,7 @@ router.post('/login', async (req, res) => {
 })
 
 
-router.get('/register', (req, res) => {
+router.get('/register', guestAccess, (req, res) => {
 
     res.render('auth/register', {
         title: 'Login page | Sofuni Nodejs'
@@ -45,7 +45,7 @@ router.post('/register', async (req, res) => {
         res.render('auth/register', {
             title: `Error | ${error.message}`,
             error,
-            message: error.message
+            message: error.message.code === 11000 ? 'Username already exist' : error.message
         })
     }else{
         res.redirect('/login')    
@@ -53,7 +53,7 @@ router.post('/register', async (req, res) => {
 
 })
 
-router.get('/logout', (req, res) => {
+router.get('/logout', isAuth, (req, res) => {
     res.clearCookie('auth')
         
     res.redirect('/')
