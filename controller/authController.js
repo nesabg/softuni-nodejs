@@ -14,10 +14,10 @@ const saveUser = async (req, res) => {
         rePassword
     } = req.body;
 
-    if(password !== rePassword){
+    if(password.length < 8 || password !== rePassword){
         return {
             error: true,
-            message: 'Passwords did`t match'
+            message: password.length < 8 ? 'Password must be longer than 8 characters' : 'Passwords did`t match'
         }
     }
 
@@ -112,9 +112,19 @@ const isLoggedIn = (req, res, next) => {
     next()
 }
 
+const guestAccess = (req, res, next) => {
+    const token = req.cookies['auth']
+
+    if (token) {
+      return res.redirect('/')
+    }
+    next()
+  }
+
 module.exports = {
     saveUser,
     getUser,
     isAuth,
-    isLoggedIn
+    isLoggedIn,
+    guestAccess
 }
