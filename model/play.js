@@ -22,7 +22,7 @@ const PlaySchema = new mongoose.Schema({
         type: Date,
         required: true
     },
-    UsersLiked: {
+    usersLiked: {
         type: Array
     }
 })

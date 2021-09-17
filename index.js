@@ -4,7 +4,7 @@ require('./config/express')(app)
 const mongoose = require('mongoose')
 
 const config = require('./config/config');
-const { isAuth, isLoggedIn } = require('./controller/authController');
+const { isLoggedIn } = require('./controller/authController');
 
 
 

@@ -31,8 +31,6 @@ const saveUser = async (req, res) => {
         })
 
         const savedUser = await newUser.save()
-        
-        console.log(savedUser)
 
     } catch(err) {
         return {
