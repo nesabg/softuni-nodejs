@@ -25,6 +25,12 @@ const createPlay = async (req, res) => {
     }
 }
 
+const getAllPlays = async (req, res) => {
+
+    return await Play.find().lean()
+}
+
 module.exports = {
-    createPlay
+    createPlay,
+    getAllPlays
 }
