@@ -83,7 +83,6 @@ const isAuth = (req, res, next) => {
 
     try{
         jwt.verify(token, config.secretKey)
-        req.isLoggedIn = true
         next()
     } catch(err) {
         req.isLoggedIn = false
@@ -100,7 +99,10 @@ const isLoggedIn = (req, res, next) => {
     }
 
     try{
-        jwt.verify(token, config.secretKey)
+        jwt.verify(token, config.secretKey, (err, data) => {
+            req.userId = data.id
+        })
+ 
         req.isLoggedIn = true
 
     } catch(err) {

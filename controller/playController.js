@@ -14,14 +14,14 @@ const createPlay = async (req, res) => {
         usersLiked: []
     })
 
-    try{
+    try {
 
         await newPlay.save()
 
-    }catch(error){
+    } catch (error) {
 
         return error
-        
+
     }
 }
 
@@ -30,7 +30,35 @@ const getAllPlays = async (req, res) => {
     return await Play.find().lean()
 }
 
+const getSinglePlay = async (req, res) => {
+    const id = req.params.id;
+
+    try {
+
+        return await Play.findById(id).lean();
+
+    } catch (err) {
+
+        return err
+
+    }
+}
+
+const likePlay = async (req, res) => {
+    
+    const id = req.params.id
+    const userId = req.userId
+
+    try{
+        return await Play.findByIdAndUpdate(id, {$push: {usersLiked: userId}})
+    }catch(err){
+        return err
+    }
+}
+
 module.exports = {
     createPlay,
-    getAllPlays
+    getAllPlays,
+    getSinglePlay,
+    likePlay
 }

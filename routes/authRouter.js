@@ -7,7 +7,7 @@ const { saveUser, getUser, guestAccess, isAuth } = require('../controller/authCo
 router.get('/login', guestAccess, (req, res) => {
 
     res.render('auth/login', {
-        title: 'Login page | Sofuni Nodejs'
+        pageTitle: 'Login page | Sofuni Nodejs'
     })
 
 })
@@ -18,7 +18,7 @@ router.post('/login', async (req, res) => {
     
     if(error) {
         res.render('auth/login', {
-            title: `Error | ${error.message}`,
+            pageTitle: `Error | ${error.message}`,
             error,
             message: error.message
         })
@@ -32,7 +32,7 @@ router.post('/login', async (req, res) => {
 router.get('/register', guestAccess, (req, res) => {
 
     res.render('auth/register', {
-        title: 'Login page | Sofuni Nodejs'
+        pageTitle: 'Login page | Sofuni Nodejs'
     })
     
 })
@@ -43,7 +43,7 @@ router.post('/register', async (req, res) => {
 
     if(error) {
         res.render('auth/register', {
-            title: `Error | ${error.message}`,
+            pageTitle: `Error | ${error.message}`,
             error,
             message: error.message.code === 11000 ? 'Username already exist' : error.message
         })
