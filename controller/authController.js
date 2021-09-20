@@ -83,6 +83,7 @@ const isAuth = (req, res, next) => {
 
     try{
         jwt.verify(token, config.secretKey)
+        req.isLoggedIn = true
         next()
     } catch(err) {
         req.isLoggedIn = false
