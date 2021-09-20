@@ -3,8 +3,9 @@ require('./config/express')(app)
 
 const mongoose = require('mongoose')
 
-const config = require('./config/config');
-const { isLoggedIn } = require('./controller/authController');
+const config = require('./config/config')
+const { isLoggedIn } = require('./controller/authController')
+const { getAllPlays } = require('./controller/playController')
 
 
 
@@ -18,10 +19,15 @@ mongoose.connect(config.dbUri, {
     }
 
     //Here is home route
-    app.get('/', isLoggedIn, (req, res) => {
+    app.get('/', isLoggedIn, async (req, res) => {
+
+      const plays = await getAllPlays()
+      
+
         res.render('home', {
             title: 'Home page',
-            isLoggedIn: req.isLoggedIn
+            isLoggedIn: req.isLoggedIn,
+            plays
         })
     })
 
