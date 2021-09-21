@@ -11,12 +11,15 @@ const createPlay = async (req, res) => {
         imageUrl,
         isPublic: isPublic == undefined ? false : true,
         createdAt: Date.now(),
-        usersLiked: []
+        usersLiked: [],
+        author: req.userId || 123
     })
 
     try {
 
-        await newPlay.save()
+        const play = await newPlay.save()
+
+        console.log(play, Date.now)
 
     } catch (error) {
 

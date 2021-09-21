@@ -20,5 +20,6 @@ section.details {
     background-color: green;
 }
 
-
-
+.details img {
+    width: 100%;
+}

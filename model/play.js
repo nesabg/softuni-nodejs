@@ -24,6 +24,10 @@ const PlaySchema = new mongoose.Schema({
     },
     usersLiked: {
         type: Array
+    },
+    author: {
+        type: String,
+        required: true
     }
 })
 
