@@ -6,8 +6,7 @@ const mongoose = require('mongoose')
 const config = require('./config/config')
 const { isLoggedIn } = require('./controller/authController')
 const { getAllPlays } = require('./controller/playController')
-
-
+const play = require('./model/play')
 
 mongoose.connect(config.dbUri, {
     useNewUrlParser: true,
@@ -21,9 +20,10 @@ mongoose.connect(config.dbUri, {
     //Here is home route
     app.get('/', isLoggedIn, async (req, res) => {
 
-      const plays = await getAllPlays()
+      const plays = (await getAllPlays())
+        .filter(e => e.isPublic === true)
+        .sort((a,b) => b.createdAt - a.createdAt)
       
-
         res.render('home', {
             title: 'Home page',
             isLoggedIn: req.isLoggedIn,

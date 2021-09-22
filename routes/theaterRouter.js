@@ -6,15 +6,18 @@ const { createPlay, getSinglePlay, likePlay } = require('../controller/playContr
 const router = express.Router()
 
 router.get('/play/:id', isLoggedIn, async (req, res) => {
+
+    const currentUser = req.userId
     
     const data = await getSinglePlay(req, res)
 
-    const userLiked = [...data.usersLiked].toLocaleString().includes(req.userId)
+    const isUserLiked = [...data.usersLiked].toLocaleString().includes(currentUser)
 
     res.render('theater/single', {
         pageTitle: 'Single Theater | Sofuni Nodejs',
         isLoggedIn: req.isLoggedIn,
-        userLiked,
+        isUserLiked,
+        isAuthor: currentUser === data.author,
         ...data
     })
 
