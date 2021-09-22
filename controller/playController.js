@@ -34,7 +34,7 @@ const getAllPlays = async (req, res) => {
     try {
 
         return await Play.find().lean()
-        
+
     } catch(e) {
 
         return {
@@ -45,15 +45,19 @@ const getAllPlays = async (req, res) => {
 }
 
 const getSinglePlay = async (req, res) => {
+
     const id = req.params.id;
 
     try {
 
         return await Play.findById(id).lean();
 
-    } catch (err) {
+    } catch (e) {
 
-        return err
+        return {   
+            error: true,
+            message: e.message
+        }
 
     }
 }
@@ -63,10 +67,24 @@ const likePlay = async (req, res) => {
     const id = req.params.id
     const userId = req.userId
 
-    try{
+    try {
         return await Play.findByIdAndUpdate(id, {$push: {usersLiked: userId}})
-    }catch(err){
-        return err
+    } catch(e) {
+        return {
+            error: true,
+            message: e.message
+        }
+    }
+}
+
+const deletePlay = async (req, res) => {
+
+    const id = req.params.id
+
+    try {
+        await Play.findByIdAndDelete(id)
+    } catch(e) {
+        console.error(e)
     }
 }
 
@@ -74,5 +92,6 @@ module.exports = {
     createPlay,
     getAllPlays,
     getSinglePlay,
-    likePlay
+    likePlay,
+    deletePlay
 }
