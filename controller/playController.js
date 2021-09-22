@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const Play = require('../model/play')
 
 const createPlay = async (req, res) => {
+
     const { title, description, imageUrl, isPublic } = req.body
 
     const newPlay = Play({
@@ -19,18 +20,28 @@ const createPlay = async (req, res) => {
 
         const play = await newPlay.save()
 
-        console.log(play, Date.now)
+    } catch (e){
 
-    } catch (error) {
-
-        return error
-
+        return {
+            error: true,
+            message: e.message
+        }
     }
 }
 
 const getAllPlays = async (req, res) => {
 
-    return await Play.find().lean()
+    try {
+
+        return await Play.find().lean()
+        
+    } catch(e) {
+
+        return {
+            error: true,
+            message: e.message
+        }
+    }
 }
 
 const getSinglePlay = async (req, res) => {
