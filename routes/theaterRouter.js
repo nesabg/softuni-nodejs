@@ -1,7 +1,7 @@
 const express = require('express')
 
 const { isLoggedIn, isAuth } = require('../controller/authController')
-const { createPlay, getSinglePlay, likePlay } = require('../controller/playController')
+const { createPlay, getSinglePlay, likePlay, deletePlay } = require('../controller/playController')
 
 const router = express.Router()
 
@@ -65,6 +65,21 @@ router.post('/create-play', isLoggedIn, isAuth, async (req, res) => {
         res.redirect('/')
     }
 
+    
+})
+
+router.get('/delete/:id', isLoggedIn, isAuth, async (req, res) => {
+
+
+    const play = await getSinglePlay(req, res)
+
+    if(play.author !== req.userId){
+        return res.redirect(`/play/${req.params.id}`)
+    }
+
+    await deletePlay(req, res)
+
+    res.status(200).redirect('/')
     
 })
 
