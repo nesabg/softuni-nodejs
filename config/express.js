@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser')
 // Adding routes
 
 const authRouter = require('../routes/authRouter')
-const theaterRouter = require('../routes/theaterRouter')
+const playRouter = require('../routes/playRouter')
 
 module.exports = (app) => {
     app.use(cookieParser())
@@ -20,5 +20,5 @@ module.exports = (app) => {
     app.use('/static', express.static('static'))
 
     app.use(authRouter)
-    app.use(theaterRouter)
+    app.use(playRouter)
   };
