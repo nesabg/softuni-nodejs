@@ -53,7 +53,35 @@ const getSinglePlay = async (req, res) => {
         return await Play.findById(id).lean();
 
     } catch (e) {
+        console.error(e)
+        return {   
+            error: true,
+            message: e.message
+        }
 
+    }
+}
+
+const editPlay = async (req, res) => {
+
+    const {
+        title,
+        description,
+        imageUrl,
+        isPublic,
+    } = req.body
+
+    try {
+
+        return await Play.findByIdAndUpdate(req.params.id, {
+            title,
+            description,
+            imageUrl,
+            isPublic: isPublic === undefined ? false : true
+        })
+
+    } catch (e) {
+        
         return {   
             error: true,
             message: e.message
@@ -93,5 +121,6 @@ module.exports = {
     getAllPlays,
     getSinglePlay,
     likePlay,
-    deletePlay
+    deletePlay,
+    editPlay
 }

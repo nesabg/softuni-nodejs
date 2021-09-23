@@ -1,7 +1,7 @@
 const express = require('express')
 
 const { isLoggedIn, isAuth } = require('../controller/authController')
-const { createPlay, getSinglePlay, likePlay, deletePlay } = require('../controller/playController')
+const { createPlay, getSinglePlay, likePlay, deletePlay, editPlay } = require('../controller/playController')
 
 const router = express.Router()
 
@@ -28,14 +28,6 @@ router.get('/like/:id', isLoggedIn, async (req, res) => {
     await likePlay(req, res)
 
     res.redirect(`/play/${req.params.id}`)
-
-})
-
-router.get('/edit-theater', isLoggedIn, (req, res) => {
-
-    res.render('theater/edit', {
-        pageTitle: 'Edit Theater | Sofuni Nodejs'
-    })
 
 })
 
@@ -68,8 +60,41 @@ router.post('/create-play', isLoggedIn, isAuth, async (req, res) => {
     
 })
 
-router.get('/delete/:id', isLoggedIn, isAuth, async (req, res) => {
+router.get('/edit-play/:id', isLoggedIn, isAuth, async (req, res) => {
 
+    const currentPlay = await getSinglePlay(req, res)
+
+    res.render('theater/edit', {
+        pageTitle: 'Create Theater | Sofuni Nodejs',
+        isLoggedIn: req.isLoggedIn,
+        ...currentPlay
+    })
+    
+})
+
+router.post('/edit-play/:id', isLoggedIn, isAuth, async (req, res) => {
+
+    const error = await editPlay(req, res)
+
+    console.log(error)
+
+    if(error.message){
+        const message = error.code === 11000 ? 'The title is already taken' : 'All fields are required or description length must be 50 characters'
+        
+        res.render('theater/edit', {
+            isLoggedIn: req.isLoggedIn,
+            pageTitle: error.code,
+            error: true,
+            message
+        })
+    }else {
+        res.redirect(`/play/${req.params.id}`)
+    }
+
+    
+})
+
+router.get('/delete/:id', isLoggedIn, isAuth, async (req, res) => {
 
     const play = await getSinglePlay(req, res)
 
