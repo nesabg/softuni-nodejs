@@ -20,10 +20,16 @@ mongoose.connect(config.dbUri, {
     //Here is home route
     app.get('/', isLoggedIn, async (req, res) => {
 
+      const sortByLikes = req.query.sort;
+
       const plays = (await getAllPlays())
         .filter(e => e.isPublic === true)
-        .sort((a,b) => b.createdAt - a.createdAt)
+        .sort((a,b) => a.createdAt - b.createdAt)
       
+        // console.log(plays)
+        sortByLikes === 'likes' ? plays.sort((a,b) => b.usersLiked.length - a.usersLiked.length) : true
+        sortByLikes === 'date' ? plays.sort((a,b) =>  b.createdAt - a.createdAt) : true
+       
         res.render('home', {
             title: 'Home page',
             isLoggedIn: req.isLoggedIn,
