@@ -76,8 +76,6 @@ router.post('/edit-play/:id', isLoggedIn, isAuth, async (req, res) => {
 
     const error = await editPlay(req, res)
 
-    console.log(error)
-
     if(error.message){
         const message = error.code === 11000 ? 'The title is already taken' : 'All fields are required or description length must be 50 characters'
         
