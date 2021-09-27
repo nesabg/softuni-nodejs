@@ -1,3 +1,7 @@
+require('dotenv').config()
+
+const env = process.env.NODE_ENV
+
 const app = require('express')()
 require('./config/express')(app)
 
@@ -8,7 +12,7 @@ const { isLoggedIn } = require('./controller/authController')
 const { getAllPlays } = require('./controller/playController')
 const play = require('./model/play')
 
-mongoose.connect(config.dbUri, {
+mongoose.connect(config[env].dbUri, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   }, (err) => {
@@ -26,7 +30,6 @@ mongoose.connect(config.dbUri, {
         .filter(e => e.isPublic === true)
         .sort((a,b) => a.createdAt - b.createdAt)
       
-        // console.log(plays)
         sortByLikes === 'likes' ? plays.sort((a,b) => b.usersLiked.length - a.usersLiked.length) : true
         sortByLikes === 'date' ? plays.sort((a,b) =>  b.createdAt - a.createdAt) : true
        
@@ -37,6 +40,6 @@ mongoose.connect(config.dbUri, {
         })
     })
 
-    app.listen(config.port, console.log(`Database and Server is up and running on port ${config.port}`))
+    app.listen(config[env].port, console.log(`Database and Server is up and running on port ${config[env].port}`))
   }) 
 
