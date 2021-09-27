@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const config = require('../config/config')
+const env = process.env.NODE_ENV
 
 
 const User = require('../model/user')
@@ -62,7 +63,7 @@ const getUser = async (req, res) => {
         const token = await jwt.sign({
             username: currentUser.username,
             id: currentUser._id
-        }, config.secretKey)
+        }, config[env].secretKey)
 
         res.cookie('auth', token)
     }else {
@@ -82,7 +83,7 @@ const isAuth = (req, res, next) => {
     }
 
     try{
-        jwt.verify(token, config.secretKey)
+        jwt.verify(token, config[env].secretKey)
         req.isLoggedIn = true
         next()
     } catch(err) {
@@ -100,7 +101,7 @@ const isLoggedIn = (req, res, next) => {
     }
 
     try{
-        jwt.verify(token, config.secretKey, (err, data) => {
+        jwt.verify(token, config[env].secretKey, (err, data) => {
             req.userId = data.id
         })
  
