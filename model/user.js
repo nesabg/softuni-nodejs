@@ -10,6 +10,21 @@ const UserSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    fullName: {
+        type: String,
+        required: true
+    },
+    avatar: {
+        type: String
+    },
+    likedPlays: {
+        type: 'ObjectId',
+        ref: 'Play'
     }
 })
 

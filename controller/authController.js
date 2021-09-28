@@ -12,7 +12,10 @@ const saveUser = async (req, res) => {
     const {
         username,
         password,
-        rePassword
+        rePassword,
+        email,
+        fullName,
+        avatar
     } = req.body;
 
     if(password.length < 8 || password !== rePassword){
@@ -28,7 +31,10 @@ const saveUser = async (req, res) => {
     try {
         const newUser = User({
             username,
-            password: hashedPass
+            password: hashedPass,
+            email,
+            fullName,
+            avatar
         })
 
         const savedUser = await newUser.save()
