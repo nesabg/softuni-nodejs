@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 
 const Play = require('../model/play')
+const User = require('../model/user')
 
 const createPlay = async (req, res) => {
 
@@ -96,6 +97,7 @@ const likePlay = async (req, res) => {
     const userId = req.userId
 
     try {
+        await User.findByIdAndUpdate(userId, {$push: {likedPlays: id}})
         return await Play.findByIdAndUpdate(id, {$push: {usersLiked: userId}})
     } catch(e) {
         return {
