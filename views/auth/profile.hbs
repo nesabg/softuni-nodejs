@@ -1,0 +1,27 @@
+<div class="user-profile">
+    <h1>Hello, {{ fullName }}</h1>
+    <div class="l-side">
+        <img src="{{ avatar }}"  />
+    </div>
+    <div class="r-side">
+        <div class="description">
+            <p class="user-info">
+                {{ userInfo }}
+            </p>
+        </div>
+        <div class="user-email">
+           User email: {{ email }}
+        </div>
+        <div class="user-nickname">
+            Username: {{ username }}
+        </div>
+    </div>
+    <div class="liked-plays">
+        <h3>Liked plays</h3>
+    {{#each likedPlays }}
+        {{> playCard}}
+    {{else}}
+        <p>You don`t have liked plays</p>
+    {{/each}}
+    </div>
+</div>

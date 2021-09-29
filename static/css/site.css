@@ -164,3 +164,66 @@ form button:hover {
     background-color: rgba(0, 0, 0, 0.329);
     color: white;
 }
+
+.user-profile {
+    width: 80%;
+    margin: 3em auto;
+}
+
+.user-profile h1 {
+    text-align: center;
+    color: white;
+    margin: 30px 0;
+}
+
+.l-side, .r-side {
+    width: 49%;
+    padding: 2em;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.l-side {
+    text-align: right;
+    border-right: 5px solid darkolivegreen;
+}
+
+.user-email, .user-nickname {
+    color: white;
+    font-size: 18px;
+}
+
+.play-card {
+    display: inline-block;
+    width: 350px;
+    text-align: center;
+    color: white;
+    margin: 15px;
+    border: 1px solid white;
+}
+
+.play-image {
+    height: 250px;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.play-card img{
+    width: 100%;
+}
+
+.play-card h2{
+    font-size: 20px;
+    color: white;
+}
+
+.liked-plays {
+    color: white;
+    text-align: center;
+    margin: 40 0;
+    padding: 40px;
+}
+
+.liked-plays h3 {
+    font-size: 40px;
+}

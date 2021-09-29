@@ -99,6 +99,16 @@ const isAuth = (req, res, next) => {
 
 }
 
+const getUserInfo = async (req, res) => {
+    const id = req.userId
+
+    try {
+        return await User.findById(id).populate('likedPlays').lean()
+    } catch(e) {
+        console.error(e)
+    }
+}
+
 const isLoggedIn = (req, res, next) => {
     const token = req.cookies['auth'];
 
@@ -134,5 +144,6 @@ module.exports = {
     getUser,
     isAuth,
     isLoggedIn,
-    guestAccess
+    guestAccess,
+    getUserInfo
 }

@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const { saveUser, getUser, guestAccess, isAuth } = require('../controller/authController')
+const { saveUser, getUser, guestAccess, isAuth, isLoggedIn, getUserInfo } = require('../controller/authController')
 
 
 router.get('/login', guestAccess, (req, res) => {
@@ -57,6 +57,17 @@ router.get('/logout', isAuth, (req, res) => {
     res.clearCookie('auth')
         
     res.redirect('/')
+})
+
+router.get('/user-profile', isLoggedIn, isAuth, async (req, res) => {
+
+    const user = await getUserInfo(req, res)
+
+    res.render('auth/profile.hbs', {
+        pageTitle: `Profile page of ${user.fullName}`,
+        isLoggedIn: req.isLoggedIn,
+        ...user
+    })
 })
 
 
