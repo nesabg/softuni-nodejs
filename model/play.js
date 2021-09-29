@@ -23,9 +23,10 @@ const PlaySchema = new mongoose.Schema({
         type: Date,
         required: true
     },
-    usersLiked: {
-        type: Array
-    },
+    usersLiked: [{
+        type: 'ObjectId',
+        ref: 'User'
+    }],
     author: {
         type: String,
         required: true

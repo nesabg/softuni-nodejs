@@ -22,10 +22,10 @@ const UserSchema = new mongoose.Schema({
     avatar: {
         type: String
     },
-    likedPlays: {
+    likedPlays: [{
         type: 'ObjectId',
         ref: 'Play'
-    }
+    }]
 })
 
 module.exports = mongoose.model('User', UserSchema)
