@@ -48,6 +48,47 @@ const saveUser = async (req, res) => {
 
 }
 
+const editUserProfile = async (req, res) => {
+
+    const id = req.params.id
+
+    const {
+        username,
+        password,
+        rePassword,
+        email,
+        fullName,
+        avatar
+    } = req.body;
+
+    if(password.length < 8 || password !== rePassword){
+        return {
+            error: true,
+            message: password.length < 8 ? 'Password must be longer than 8 characters' : 'Passwords did`t match'
+        }
+    }
+
+    const salt = await bcrypt.genSalt(10)
+    const hashedPass = await bcrypt.hash(password, salt)
+
+    try {
+       
+        return await User.findByIdAndUpdate(id, {
+            username,
+            email,
+            fullName,
+            avatar,
+            password: hashedPass
+        })
+
+    } catch(err) {
+        return {
+            error: true,
+            message: err
+        }
+    }
+}
+
 const getUser = async (req, res) => {
     const {
         username, 
@@ -145,5 +186,6 @@ module.exports = {
     isAuth,
     isLoggedIn,
     guestAccess,
-    getUserInfo
+    getUserInfo,
+    editUserProfile
 }
