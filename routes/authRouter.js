@@ -1,7 +1,8 @@
 const express = require('express')
 const router = express.Router()
 
-const { saveUser, getUser, guestAccess, isAuth, isLoggedIn, getUserInfo } = require('../controller/authController')
+const { saveUser, getUser, guestAccess, isAuth, isLoggedIn, getUserInfo, editUserProfile } = require('../controller/authController')
+const user = require('../model/user')
 
 
 router.get('/login', guestAccess, (req, res) => {
@@ -63,16 +64,43 @@ router.get('/user-profile', isLoggedIn, isAuth, async (req, res) => {
 
     const user = await getUserInfo(req, res)
 
-    res.render('auth/profile.hbs', {
+    res.render('auth/profile', {
         pageTitle: `Profile page of ${user.fullName}`,
         isLoggedIn: req.isLoggedIn,
         ...user
     })
 })
 
+router.get('/user-edit/:id', isLoggedIn, isAuth, async (req, res) => {
+    
+    if(req.userId !== req.params.id) {
+        res.redirect('/')
+    }
 
+    const user = await getUserInfo(req, res)
 
+    res.render('auth/edit', {
+        pageTitle: `Edit profile of user ${user.fullName}`,
+        isLoggedIn: req.isLoggedIn,
+        ...user
+    })
+})
 
+router.post('/user-edit/:id', async (req, res) => {
+
+    const error = await editUserProfile(req, res)
+
+    if(error.message) {
+        res.render('auth/edit', {
+            pageTitle: `Error | ${error.message}`,
+            error,
+            message: error.message.code === 11000 ? 'Username already exist' : error.message
+        })
+    }else{
+        res.redirect('/user-profile')    
+    }
+
+})
 
 
 module.exports = router

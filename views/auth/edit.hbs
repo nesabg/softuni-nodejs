@@ -1,0 +1,34 @@
+<form  action="/user-edit/{{_id}}" method="POST">
+    <h2>Register</h2>
+    <div class="on-dark">
+        <label for="username">Username:</label>
+        <input  type="text" placeholder="Steven" value="{{ username }}" name="username">
+    </div>
+
+    <div class="on-dark">
+        <label for="email">Email address:</label>
+        <input  type="email" placeholder="Steven@hotmail.com" value="{{ email }}" name="email">
+    </div>
+
+    <div class="on-dark">
+        <label for="password">Password:</label>
+        <input  type="password"  placeholder="********" value="" name="password">
+    </div>
+
+    <div class="on-dark">
+        <label for="repeatPassword">Repeat Password:</label>
+        <input  type="password" placeholder="********" value="" name="rePassword">
+    </div>
+
+    <div class="on-dark">
+        <label for="fullName">Full Name:</label>
+        <input  type="text" placeholder="Steven Doe" value="{{ fullName }}" name="fullName">
+    </div>
+
+    <div class="on-dark">
+        <label for="avatar">Avatar url:</label>
+        <input  type="text" placeholder="https://..........jpg/png" value="{{ avatar }}" name="avatar">
+    </div>
+
+    <button class="btn" type="submit" >Edit profile</button>
+</form>

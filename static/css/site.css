@@ -58,7 +58,7 @@ nav a:hover, footer a:hover {
 }
 
 footer {
-    position: absolute;
+    position: relative;
     bottom: 0;
     width: 100%;
     color: white;
@@ -190,7 +190,7 @@ form button:hover {
 
 .user-email, .user-nickname {
     color: white;
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .play-card {
@@ -227,3 +227,16 @@ form button:hover {
 .liked-plays h3 {
     font-size: 40px;
 }
+
+.edit-profile {
+    text-align: left;
+    margin: 20px 0;
+}
+
+.edit-profile a {
+    font-size: 20px;
+    margin: 0 auto;
+    padding: 6px 36px;
+    border: 1px solid rgb(209, 192, 192);
+    color: white;
+}   
