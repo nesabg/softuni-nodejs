@@ -15,6 +15,7 @@ const saveUser = async (req, res) => {
         rePassword,
         email,
         fullName,
+        bio,
         avatar
     } = req.body;
 
@@ -34,7 +35,8 @@ const saveUser = async (req, res) => {
             password: hashedPass,
             email,
             fullName,
-            avatar
+            avatar,
+            bio
         })
 
         const savedUser = await newUser.save()
@@ -58,6 +60,7 @@ const editUserProfile = async (req, res) => {
         rePassword,
         email,
         fullName,
+        bio,
         avatar
     } = req.body;
 
@@ -78,7 +81,8 @@ const editUserProfile = async (req, res) => {
             email,
             fullName,
             avatar,
-            password: hashedPass
+            password: hashedPass,
+            bio
         })
 
     } catch(err) {

@@ -239,4 +239,12 @@ form button:hover {
     padding: 6px 36px;
     border: 1px solid rgb(209, 192, 192);
     color: white;
-}   
+}
+
+.bio-info {
+    font-size: 16px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 20px 0;
+    padding-bottom: 20px;
+    color:rgb(209, 192, 192);
+}

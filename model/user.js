@@ -22,6 +22,12 @@ const UserSchema = new mongoose.Schema({
     avatar: {
         type: String
     },
+    bio: {
+        type: String,
+        required: true,
+        minlength: 50,
+        maxlength: 2000
+    },
     likedPlays: [{
         type: 'ObjectId',
         ref: 'Play'
