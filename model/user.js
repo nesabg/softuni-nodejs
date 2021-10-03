@@ -31,7 +31,13 @@ const UserSchema = new mongoose.Schema({
     likedPlays: [{
         type: 'ObjectId',
         ref: 'Play'
-    }]
+    }],
+    lastLoginDate: [{
+        type: Array
+    }],
+    lastLoginIp: {
+        type: Array
+    }
 })
 
 module.exports = mongoose.model('User', UserSchema)
