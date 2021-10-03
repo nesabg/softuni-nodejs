@@ -64,6 +64,8 @@ router.get('/user-profile', isLoggedIn, isAuth, async (req, res) => {
 
     const user = await getUserInfo(req, res)
 
+    console.log(user)
+
     res.render('auth/profile', {
         pageTitle: `Profile page of ${user.fullName}`,
         isLoggedIn: req.isLoggedIn,

@@ -36,7 +36,9 @@ const saveUser = async (req, res) => {
             email,
             fullName,
             avatar,
-            bio
+            bio,
+            lastLoginIp: [],
+            lastLoginDate: []
         })
 
         const savedUser = await newUser.save()
@@ -116,7 +118,15 @@ const getUser = async (req, res) => {
             id: currentUser._id
         }, config[env].secretKey)
 
+        const lastLoginIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+
+        const lastLoginDate = new Date()
+
+        const data = await User.findByIdAndUpdate(currentUser._id, { $push: {lastLoginDate, lastLoginIp} })
+                
+      console.log(data);
         res.cookie('auth', token)
+
     }else {
         return {
             error: true,
