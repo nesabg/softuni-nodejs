@@ -64,12 +64,18 @@ router.get('/user-profile', isLoggedIn, isAuth, async (req, res) => {
 
     const user = await getUserInfo(req, res)
 
-    console.log(user)
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' }
+
+    const lastLoginDate = user.lastLoginDate.slice(-2)[0].toLocaleDateString('bg-BG', options)
+
+    const lastLoginIp = user.lastLoginIp.slice(-2)[0]
 
     res.render('auth/profile', {
         pageTitle: `Profile page of ${user.fullName}`,
         isLoggedIn: req.isLoggedIn,
-        ...user
+        ...user,
+        lastLoginDate,
+        lastLoginIp
     })
 })
 

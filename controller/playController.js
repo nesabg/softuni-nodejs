@@ -50,7 +50,7 @@ const getSinglePlay = async (req, res) => {
     const id = req.params.id;
 
     try {
-
+        await Play.findByIdAndUpdate(id, {$inc: {playViews: 1}})
         return await Play.findById(id).lean();
 
     } catch (e) {
