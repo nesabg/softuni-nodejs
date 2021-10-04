@@ -30,6 +30,10 @@ const PlaySchema = new mongoose.Schema({
     author: {
         type: String,
         required: true
+    },
+    playViews: {
+        type: Number,
+        default: 0
     }
 })
 
