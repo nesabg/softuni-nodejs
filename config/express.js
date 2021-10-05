@@ -23,7 +23,7 @@ module.exports = (app) => {
     app.use('/static', express.static('static'))
 
     app.use(compression())
-    app.use(helmet())
+    // app.use(helmet())
 
     app.use(authRouter)
     app.use(playRouter)
