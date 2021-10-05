@@ -12,9 +12,7 @@ const { isLoggedIn } = require('./controller/authController')
 const { getAllPlays } = require('./controller/playController')
 const play = require('./model/play')
 
-console.log(config[env].dbUri)
-
-mongoose.connect(config[env].dbUri, {
+mongoose.connect(process.env.DB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   }, (err) => {
