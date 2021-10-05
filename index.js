@@ -2,6 +2,8 @@ require('dotenv').config()
 
 const env = process.env.NODE_ENV
 
+console.log(env)
+
 const app = require('express')()
 require('./config/express')(app)
 
