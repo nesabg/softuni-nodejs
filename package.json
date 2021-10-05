@@ -1,12 +1,14 @@
 {
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "compresion": "^1.7.11",
     "cookie-parser": "^1.4.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-handlebars": "^5.3.3",
+    "helmet": "^4.6.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.0.1"
+    "mongoose": "^6.0.9"
   },
   "devDependencies": {
     "nodemon": "^2.0.12"
@@ -14,6 +16,9 @@
   "name": "softuni-project-node",
   "version": "1.0.0",
   "main": "index.js",
+  "engines": {
+    "node": "14.16.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon"
