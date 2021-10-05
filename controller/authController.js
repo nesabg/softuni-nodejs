@@ -116,7 +116,7 @@ const getUser = async (req, res) => {
         const token = await jwt.sign({
             username: currentUser.username,
             id: currentUser._id
-        }, config[env].secretKey)
+        }, process.env.SECRET)
 
         const lastLoginIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 
@@ -144,7 +144,7 @@ const isAuth = (req, res, next) => {
     }
 
     try{
-        jwt.verify(token, config[env].secretKey)
+        jwt.verify(token, process.env.SECRET)
         req.isLoggedIn = true
         next()
     } catch(err) {
@@ -172,7 +172,7 @@ const isLoggedIn = (req, res, next) => {
     }
 
     try{
-        jwt.verify(token, config[env].secretKey, (err, data) => {
+        jwt.verify(token, process.env.SECRET, (err, data) => {
             req.userId = data.id
         })
  

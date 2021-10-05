@@ -1,13 +1,10 @@
 require('dotenv').config()
 
-const env = process.env.NODE_ENV
-
 const app = require('express')()
 require('./config/express')(app)
 
 const mongoose = require('mongoose')
 
-const config = require('./config/config')
 const { isLoggedIn } = require('./controller/authController')
 const { getAllPlays } = require('./controller/playController')
 const play = require('./model/play')
