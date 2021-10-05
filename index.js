@@ -12,7 +12,7 @@ const { isLoggedIn } = require('./controller/authController')
 const { getAllPlays } = require('./controller/playController')
 const play = require('./model/play')
 
-const port = process.env.port || 3000
+const port = process.env.PORT || 3000
 
 mongoose.connect(process.env.DB_URI, {
     useNewUrlParser: true,
@@ -42,6 +42,6 @@ mongoose.connect(process.env.DB_URI, {
         })
     })
 
-    app.listen(port, console.log(`Database and Server is up and running on port ${port}`))
+    app.listen(port, console.log(`Database and Server is up and running on port ${hport}`))
   }) 
 
