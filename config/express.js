@@ -1,6 +1,9 @@
 const express = require('express')
 const handlebars = require('express-handlebars')
 const cookieParser = require('cookie-parser')
+const compression = require('compression')
+const helmet = require('helmet')
+
 
 // Adding routes
 
@@ -18,6 +21,9 @@ module.exports = (app) => {
     app.set('view engine', '.hbs');
   
     app.use('/static', express.static('static'))
+
+    app.use(compression())
+    app.use(helmet())
 
     app.use(authRouter)
     app.use(playRouter)

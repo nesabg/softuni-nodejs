@@ -4,5 +4,9 @@ module.exports = {
     dbUri: process.env.DB_URI,
     secretKey: process.env.SECRET
   },
-  production: {}
+  production: {
+    port: process.env.PORT,
+    dbUri: process.env.DB_URI,
+    secretKey: process.env.SECRET
+  }
 }
