@@ -40,6 +40,6 @@ mongoose.connect(process.env.DB_URI, {
         })
     })
 
-    app.listen(cprocess.env.port, console.log(`Database and Server is up and running on port ${process.env.port}`))
+    app.listen(process.env.port, console.log(`Database and Server is up and running on port ${process.env.port}`))
   }) 
 
